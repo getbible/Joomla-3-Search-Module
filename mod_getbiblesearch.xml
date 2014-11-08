@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>Get Bible Search</name>
+	<author>Vast Development Method</author>
+	<creationDate>February 2014</creationDate>
+	<copyright>Copyright VDM</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>support@vdm.io</authorEmail>
+	<authorUrl>www.vdm.io</authorUrl>
+	<version>1.0.0</version>
+	<description>A Search Module for getBible</description>
+	<scriptfile>script.php</scriptfile>
+	<files>
+		<filename module="mod_getbiblesearch">mod_getbiblesearch.php</filename>
+		<filename>getbiblesearch.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_getbiblesearch.xml</filename>
+		<folder>tmpl</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>images</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.mod_getbiblesearch.ini</language>
+		<language tag="en-GB">administrator/language/en-GB/en-GB.mod_getbiblesearch.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">	
+				<field 
+					name="version" 
+					type="text" 
+					default="kjv" 
+					label="MOD_GETBIBLESEARCH_SET_VERSION_LABEL" 
+					description="MOD_GETBIBLESEARCH_SET_VERSION_DESC" 
+				/>
+				<field
+					name="mode"
+					type="list"
+					default="1"
+					label="MOD_GETBIBLESEARCH_DISPLAY_MODE_LABEL"
+					description="MOD_GETBIBLESEARCH_DISPLAY_MODE_DESC">
+					<option
+						value="1">MOD_GETBIBLESEARCH_OFF_CANVAS</option>
+					<option
+						value="0">MOD_GETBIBLESEARCH_IN_MODULE_POSITION</option>
+				</field>
+				<field 
+					name="search_button"
+					type="text" 
+					default="Search the Scripture" 
+					label="MOD_GETBIBLESEARCH_SEARCH_BUTTON_LABEL" 
+					description="MOD_GETBIBLESEARCH_SEARCH_BUTTON_DESC" 
+				/>
+				<field 
+					name="search_phrase"
+					type="text" 
+					default="search..." 
+					label="MOD_GETBIBLESEARCH_SEARCH_PHRASE_LABEL" 
+					description="MOD_GETBIBLESEARCH_SEARCH_PHRASE_DESC" 
+				/>
+				<field
+					name="search_options"
+					type="radio" class="btn-group btn-group-yesno"
+					default="1"
+					label="MOD_GETBIBLESEARCH_SEARCH_OPTIONS_LABEL"
+					description="MOD_GETBIBLESEARCH_SEARCH_OPTIONS_DESC">
+					<option
+						value="0">MOD_GETBIBLESEARCH_NO</option>
+					<option
+						value="1">MOD_GETBIBLESEARCH_YES</option>
+				</field>
+				<field
+					name="search_crit1"
+					type="radio" class="btn-group"
+					default="1"
+					label="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_LABEL"
+					description="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_DESC">
+					<option
+						value="1">MOD_GETBIBLESEARCH_ALL_WORDS</option>
+					<option
+						value="2">MOD_GETBIBLESEARCH_ANY_WORDS</option>
+					<option
+						value="3">MOD_GETBIBLESEARCH_PHRASE</option>
+				</field>
+				<field
+					name="search_type"
+					type="radio" class="btn-group"
+					default="all"
+					label="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_LABEL"
+					description="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_DESC">
+					<option
+						value="all">MOD_GETBIBLESEARCH_BIBLE</option>
+					<option
+						value="ot">MOD_GETBIBLESEARCH_OT</option>
+					<option
+						value="nt">MOD_GETBIBLESEARCH_NT</option>
+				</field>
+				<field
+					name="search_crit2"
+					type="radio" class="btn-group"
+					default="1"
+					label="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_LABEL"
+					description="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_DESC">
+					<option
+						value="1">MOD_GETBIBLESEARCH_EXACT_MATCH</option>
+					<option
+						value="2">MOD_GETBIBLESEARCH_PARTIAL_MATCH</option>
+				</field>
+				<field
+					name="search_crit3"
+					type="radio" class="btn-group"
+					default="1"
+					label="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_LABEL"
+					description="MOD_GETBIBLESEARCH_SEARCH_DEFAULTS_DESC">
+					<option
+						value="1">MOD_GETBIBLESEARCH_CASE_INSENSITIVE</option>
+					<option
+						value="2">MOD_GETBIBLESEARCH_CASE_SENSITIVE</option>
+				</field>
+			</fieldset>
+			<fieldset
+				name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+				<field
+					name="moduleclass_sfx"
+					type="textarea" rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option
+						value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
