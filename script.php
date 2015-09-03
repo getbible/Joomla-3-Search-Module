@@ -26,7 +26,7 @@ class mod_getbiblesearchInstallerScript
 		
 		$app = JFactory::getApplication();
 		
-		if (!file_exists(JPATH_ROOT.DS.'components'.DS.'com_getbible'.DS.'helpers'.DS.'script_checker.php')) {
+		if (!file_exists(JPATH_ROOT.'/components/com_getbible/helpers/script_checker.php')) {
 			$app->enqueueMessage('Please install the <a href="https://getbible.net/downloads" target="_blank">GetBible component</a> before continuing.', 'error');
 			return false;
 		}

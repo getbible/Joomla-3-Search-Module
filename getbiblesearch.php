@@ -10,15 +10,8 @@
 **/
 defined( '_JEXEC' ) or die;
 
-// Added for Joomla 3.0
-if(!defined('DS')){
-	define('DS',DIRECTORY_SEPARATOR);
-};
-
 jimport('joomla.application.component.helper');
 jimport('joomla.application.router');
-// load the helper function from component
-require_once( JPATH_ROOT.DS.'components'.DS.'com_getbible'.DS.'helpers'.DS.'script_checker.php' );
 
 class getSearch
 {
@@ -40,16 +33,16 @@ class getSearch
 		// set the getBible component params
         $this->params		= &JComponentHelper::getParams('com_getbible');
 		// make sure all scripts are loaded
-		if (!HeaderCheck::css_loaded('uikit')) {
-			$this->document->addStyleSheet(JURI::base( true ) .DS.'media'.DS.'com_getbible'.DS.'css'.DS.'uikit.min.css');
+		if (!$this->css_loaded('uikit')) {
+			$this->document->addStyleSheet(JURI::base( true ) .'/media/com_getbible/css/uikit.min.css');
 		}
-		if (!HeaderCheck::js_loaded('jquery')) {			
+		if (!$this->js_loaded('jquery')) {			
 			if($params->get('search_options') == 1){
 				JHtml::_('jquery.framework');
 			}
 		}
-		if (!HeaderCheck::js_loaded('uikit')) {
-			$this->document->addScript(JURI::base( true ) .DS.'media'.DS.'com_getbible'.DS.'js'.DS.'uikit.min.js');
+		if (!$this->js_loaded('uikit')) {
+			$this->document->addScript(JURI::base( true ) .'/media/com_getbible/js/uikit.min.js');
 		}
 		// load the correct form action
 		$itemid = $this->getMenuItemId('app');
@@ -76,9 +69,7 @@ class getSearch
 				return $item->id;
 			}
         }
-
         return false;
-
     }
 	
 	protected function getRouteUrl($route) {
@@ -109,7 +100,7 @@ class getSearch
 	{	
 		if ($this->params->get('jsonQueryOptions') == 1){
 			
-			$path 		= JPATH_SITE.DS.'media'.DS.'com_getbible'.DS.'json'.DS.'cpanel.json';
+			$path 		= JPATH_SITE.'/media/com_getbible/json/cpanel.json';
 			$cpanel 	= @file_get_contents($path);
 			
 			if($cpanel === FALSE){
@@ -131,7 +122,7 @@ class getSearch
 			
 		} else {
 			
-			$path 		= 'http://getbible.net/media/com_getbible/json/cpanel.json';
+			$path 		= 'https://getbible.net/media/com_getbible/json/cpanel.json';
 			$cpanel 	= @file_get_contents($path);
 			
 			if($cpanel === FALSE){
@@ -142,5 +133,47 @@ class getSearch
 			
 		}
 
+	}
+	
+	protected function js_loaded($script_name)
+	{
+		// UIkit check point
+		if($script_name == 'uikit'){
+			$getTemplateName  	= JFactory::getApplication()->getTemplate('template')->template;
+			
+			if (strpos($getTemplateName,'yoo') !== false) {
+				return true;
+			}
+		}
+		
+		$head_data 	= $this->document->getHeadData();
+		foreach (array_keys($head_data['scripts']) as $script) {
+			if (stristr($script, $script_name)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	protected function css_loaded($script_name)
+	{
+		// UIkit check point
+		if($script_name == 'uikit'){
+			$getTemplateName  	= JFactory::getApplication()->getTemplate('template')->template;
+			
+			if (strpos($getTemplateName,'yoo') !== false) {
+				return true;
+			}
+		}
+		
+		$head_data 	= $this->document->getHeadData();
+		
+		foreach (array_keys($head_data['styleSheets']) as $script) {
+			if (stristr($script, $script_name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
