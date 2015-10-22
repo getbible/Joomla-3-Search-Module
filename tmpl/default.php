@@ -17,9 +17,9 @@ defined( '_JEXEC' ) or die;
         <fieldset data-uk-margin="">
             <button class="uk-button submit_search_<?php echo $module->uniqueId; ?>" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}" ><i class="uk-icon-search"></i> <?php echo $params->get('search_button'); ?></button>
     <?php elseif($params->get('search_display') == 2):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
             <input type="submit" style="display:none;" >
             <input  class="uk-hidden search_crit_<?php echo $module->uniqueId; ?>" type="hidden" name="search_crit"  
             value="<?php echo $params->get('search_crit1'); ?>_<?php echo $params->get('search_crit2'); ?>_<?php echo $params->get('search_crit3'); ?>" >
@@ -27,22 +27,35 @@ defined( '_JEXEC' ) or die;
             <input class="uk-hidden search_version_<?php echo $module->uniqueId; ?>" type="hidden" name="search_version" value="<?php echo $params->get('version'); ?>">
             <input class="uk-hidden search_app_<?php echo $module->uniqueId; ?>" type="hidden" name="search_app" value="1">
     <?php elseif($params->get('search_display') == 3):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
-            <input class="uk-button submit_search_<?php echo $module->uniqueId; ?>" type="submit"  value="<?php echo $params->get('search_button'); ?>" >
+	    <div class="uk-grid uk-grid-collapse">
+	    <div class="uk-width-3-4">
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    </div>
+	    <div class="uk-width-1-4">
+            <button class="uk-button uk-width-1-1 submit_search_<?php echo $module->uniqueId; ?>" type="submit"  ><?php echo $params->get('search_button'); ?></button>
+	    </div>
+	    </div>
             <input  class="uk-hidden search_crit_<?php echo $module->uniqueId; ?>" type="hidden" name="search_crit"  
             value="<?php echo $params->get('search_crit1'); ?>_<?php echo $params->get('search_crit2'); ?>_<?php echo $params->get('search_crit3'); ?>" >
             <input class="uk-hidden search_type_<?php echo $module->uniqueId; ?>" type="hidden" name="search_type" value="<?php echo $params->get('search_type'); ?>">
             <input class="uk-hidden search_version_<?php echo $module->uniqueId; ?>" type="hidden" name="search_version" value="<?php echo $params->get('version'); ?>">
             <input class="uk-hidden search_app_<?php echo $module->uniqueId; ?>" type="hidden" name="search_app" value="1">
     <?php elseif($params->get('search_display') == 4):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
-            <input class="uk-button submit_search_<?php echo $module->uniqueId; ?>" type="submit"  value="<?php echo $params->get('search_button'); ?>" >
+	    <div class="uk-grid uk-grid-collapse">
+	    <div class="uk-width-3-<?php echo ($params->get('search_options') == 1) ? 5:4; ?>">
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    </div>
+	    <div class="uk-width-<?php echo ($params->get('search_options') == 1) ? '2-5 uk-button-group':'1-4'; ?>">
+		    <button class="uk-button uk-width-<?php echo ($params->get('search_options') == 1) ? '1-2':'1-1'; ?> submit_search_<?php echo $module->uniqueId; ?>" type="submit"  ><?php echo ($params->get('search_options') == 1) ? '<i class="uk-icon-search"></i>':$params->get('search_button'); ?></button>
+	    <?php echo ($params->get('search_options') == 1) ? '':'</div></div>'; ?>
             <?php if($params->get('search_options') == 1): ?>
-            <button class="uk-button" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><?php echo $params->get('advanced_button'); ?></button>
+            <button class="uk-button uk-width-1-2" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><i class="uk-icon-wrench"></i></button>
+	    </div>
+	    </div>
             <?php endif; ?>
             <input  class="uk-hidden search_crit_<?php echo $module->uniqueId; ?>" type="hidden" name="search_crit"  
             value="<?php echo $params->get('search_crit1'); ?>_<?php echo $params->get('search_crit2'); ?>_<?php echo $params->get('search_crit3'); ?>" >
@@ -50,12 +63,18 @@ defined( '_JEXEC' ) or die;
             <input class="uk-hidden search_version_<?php echo $module->uniqueId; ?>" type="hidden" name="search_version" value="<?php echo $params->get('version'); ?>">
             <input class="uk-hidden search_app_<?php echo $module->uniqueId; ?>" type="hidden" name="search_app" value="1">
     <?php elseif($params->get('search_display') == 5):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    <div class="uk-grid uk-grid-collapse">
+	    <div class="uk-width-<?php echo ($params->get('search_options') == 1) ? '2-3':'1-1'; ?>">
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    </div>
             <input type="submit" style="display:none;" >
             <?php if($params->get('search_options') == 1): ?>
-            <button class="uk-button" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><?php echo $params->get('advanced_button'); ?></button>
+	    <div class="uk-width-1-3">
+            <button class="uk-button uk-width-1-1" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><?php echo $params->get('advanced_button'); ?></button>
+	    </div>
+	    </div>
             <?php endif; ?>
             <input  class="uk-hidden search_crit_<?php echo $module->uniqueId; ?>" type="hidden" name="search_crit"  
             value="<?php echo $params->get('search_crit1'); ?>_<?php echo $params->get('search_crit2'); ?>_<?php echo $params->get('search_crit3'); ?>" >
@@ -63,12 +82,12 @@ defined( '_JEXEC' ) or die;
             <input class="uk-hidden search_version_<?php echo $module->uniqueId; ?>" type="hidden" name="search_version" value="<?php echo $params->get('version'); ?>">
             <input class="uk-hidden search_app_<?php echo $module->uniqueId; ?>" type="hidden" name="search_app" value="1">
     <?php elseif($params->get('search_display') == 6):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
             <input type="submit" style="display:none;" >
             <?php if($params->get('search_options') == 1): ?>
-            <select class="uk-margin-small-top search_version_select_<?php echo $module->uniqueId; ?>" >
+            <select class="uk-margin-small-top uk-width-1-1 search_version_select_<?php echo $module->uniqueId; ?>" >
 				<?php foreach($module->versions as $key => $version): ?>
                     <?php if($key == $params->get('version')) :?>
                         <option value="<?php echo $key; ?>" selected="selected" >(<?php echo $version->language; ?>) <?php echo $version->version_name; ?></option>
@@ -84,12 +103,18 @@ defined( '_JEXEC' ) or die;
             <input class="uk-hidden search_version_<?php echo $module->uniqueId; ?>" type="hidden" name="search_version" value="<?php echo $params->get('version'); ?>">
             <input class="uk-hidden search_app_<?php echo $module->uniqueId; ?>" type="hidden" name="search_app" value="1">
     <?php elseif($params->get('search_display') == 7):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
-            <input class="uk-button submit_search_<?php echo $module->uniqueId; ?>" type="submit"  value="<?php echo $params->get('search_button'); ?>" >
+	    <div class="uk-grid uk-grid-collapse">
+	    <div class="uk-width-3-4">
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    </div>
+	    <div class="uk-width-1-4">
+            <button class="uk-button uk-width-1-1 submit_search_<?php echo $module->uniqueId; ?>" type="submit"  ><?php echo $params->get('search_button'); ?></button>
+	    </div>
+	    </div>
             <?php if($params->get('search_options') == 1): ?>
-            <select class="uk-margin-small-top search_version_select_<?php echo $module->uniqueId; ?>" >
+            <select class="uk-width-1-1 uk-margin-small-top uk-width-1-1 search_version_select_<?php echo $module->uniqueId; ?>" >
 				<?php foreach($module->versions as $key => $version): ?>
                     <?php if($key == $params->get('version')) :?>
                         <option value="<?php echo $key; ?>" selected="selected" >(<?php echo $version->language; ?>) <?php echo $version->version_name; ?></option>
@@ -105,13 +130,20 @@ defined( '_JEXEC' ) or die;
             <input class="uk-hidden search_version_<?php echo $module->uniqueId; ?>" type="hidden" name="search_version" value="<?php echo $params->get('version'); ?>">
             <input class="uk-hidden search_app_<?php echo $module->uniqueId; ?>" type="hidden" name="search_app" value="1">
     <?php elseif($params->get('search_display') == 8):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
-            <input class="uk-button submit_search_<?php echo $module->uniqueId; ?>" type="submit"  value="<?php echo $params->get('search_button'); ?>" >
+	    <div class="uk-grid uk-grid-collapse">
+	    <div class="uk-width-3-<?php echo ($params->get('search_options') == 1) ? 5:4; ?>">
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    </div>
+	    <div class="uk-width-<?php echo ($params->get('search_options') == 1) ? '2-5 uk-button-group':'1-4'; ?>">
+		    <button class="uk-button uk-width-<?php echo ($params->get('search_options') == 1) ? '1-2':'1-1'; ?> submit_search_<?php echo $module->uniqueId; ?>" type="submit"  ><?php echo ($params->get('search_options') == 1) ? '<i class="uk-icon-search"></i>':$params->get('search_button'); ?></button>
+	    <?php echo ($params->get('search_options') == 1) ? '':'</div></div>'; ?>
             <?php if($params->get('search_options') == 1): ?>
-            <button class="uk-button" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><?php echo $params->get('advanced_button'); ?></button>
-            <select class="uk-margin-small-top search_version_select_<?php echo $module->uniqueId; ?>" >
+            <button class="uk-button uk-width-1-2" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><i class="uk-icon-wrench"></i></button>
+	    </div>
+	    </div>
+            <select class="uk-margin-small-top uk-width-1-1 search_version_select_<?php echo $module->uniqueId; ?>" >
 				<?php foreach($module->versions as $key => $version): ?>
                     <?php if($key == $params->get('version')) :?>
                         <option value="<?php echo $key; ?>" selected="selected" >(<?php echo $version->language; ?>) <?php echo $version->version_name; ?></option>
@@ -127,13 +159,19 @@ defined( '_JEXEC' ) or die;
             <input class="uk-hidden search_version_<?php echo $module->uniqueId; ?>" type="hidden" name="search_version" value="<?php echo $params->get('version'); ?>">
             <input class="uk-hidden search_app_<?php echo $module->uniqueId; ?>" type="hidden" name="search_app" value="1">
     <?php elseif($params->get('search_display') == 9):?>
-    <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
+    <form action="<?php echo $module->action; ?>" class="uk-form" id="search_form" method="post">
         <fieldset data-uk-margin="">
-            <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    <div class="uk-grid uk-grid-collapse">
+	    <div class="uk-width-<?php echo ($params->get('search_options') == 1) ? '2-3':'1-1'; ?>">
+            <input class="search_field_<?php echo $module->uniqueId; ?> uk-width-1-1" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>">
+	    </div>
             <input type="submit" style="display:none;" >
             <?php if($params->get('search_options') == 1): ?>
-            <button class="uk-button" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><?php echo $params->get('advanced_button'); ?></button>
-            <select class="uk-margin-small-top search_version_select_<?php echo $module->uniqueId; ?>" >
+	    <div class="uk-width-1-3">
+            <button class="uk-button uk-width-1-1" data-uk-offcanvas="{target:'#search_scripture_<?php echo $module->uniqueId; ?>'}"><?php echo $params->get('advanced_button'); ?></button>
+	    </div>
+	    </div>
+            <select class="uk-margin-small-top uk-width-1-1 search_version_select_<?php echo $module->uniqueId; ?>" >
 				<?php foreach($module->versions as $key => $version): ?>
                     <?php if($key == $params->get('version')) :?>
                         <option value="<?php echo $key; ?>" selected="selected" >(<?php echo $version->language; ?>) <?php echo $version->version_name; ?></option>
@@ -157,7 +195,7 @@ defined( '_JEXEC' ) or die;
         <div class="uk-offcanvas-bar">
             <?php if($params->get('search_display') == 1):?>
                 <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
-                    <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
+                    <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
                     <div class="uk-margin">
                         <input class="uk-button submit_search_<?php echo $module->uniqueId; ?>" type="submit"  value="<?php echo $params->get('search_button'); ?>" >
                     </div>
@@ -276,7 +314,7 @@ defined( '_JEXEC' ) or die;
 
 <div id="getbible_search">
     <form action="<?php echo $module->action; ?>" class="uk-form uk-search" id="search_form" method="post">
-        <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="input" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
+        <input class="search_field_<?php echo $module->uniqueId; ?> uk-search-field" type="text" name="search" placeholder="<?php echo $params->get('search_phrase'); ?>" >
         <?php if($params->get('search_options') == 1): ?>
             <div class="uk-margin">
                 <input class="uk-button submit_search_<?php echo $module->uniqueId; ?>" type="submit"  value="<?php echo $params->get('search_button'); ?>" >
